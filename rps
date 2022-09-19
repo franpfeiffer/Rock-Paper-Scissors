@@ -1,0 +1,95 @@
+#include<iostream>
+#include<ctime>
+using namespace std;
+
+char userChoice();
+char computerChoice();
+void showChoice(char choice);
+void winner(char player, char computer);
+
+int main(){
+	char player, computer;
+	
+	player = userChoice();
+	
+	cout << "Elegiste: ";
+	showChoice(player);
+	
+	computer = computerChoice();
+	cout << "El rival elijio:" << endl;
+	
+	showChoice(computer);
+	
+	winner(player, computer);
+	
+	
+	return 0;
+}
+char userChoice(){
+	
+	char player;
+	
+	cout << "Piedra-Papel-Tijera" << endl;
+	cout << " " << endl; 
+	do{
+		cout << "Elegi una de las siguentes" << endl;
+		cout << "**************************" << endl;
+		cout << "'p' (minuscula) para Piedra" << endl;
+		cout << "'P' (mayuscula) para Papel" << endl;
+		cout << "'T' para Tijera" << endl;
+		cin >> player;	
+	} while(player != 'p' && player != 'T' && player != 'P');
+	
+	return player;
+}
+char computerChoice(){
+	srand(time(0));
+	int num = rand() % 3 + 1;
+	
+	switch(num){
+	case 1: return 'p';
+	case 2: return 'P';
+	case 3: return 'T';
+	}
+	
+	return 0;
+}
+void showChoice(char choice){
+	
+	switch(choice){
+	case 'p': cout << "Piedra\n";
+			break;
+	case 'P': cout << "Papel\n";
+			break;
+	case 'T': cout << "Tijera\n";
+			break;
+	}
+}
+void winner(char player, char computer){
+	
+	switch(player){
+	case 'p': if(computer == 'p'){
+		cout << "Empataron!" << endl;
+	}else if(computer == 'T'){
+		cout << "Ganaste!" << endl;
+	}else{
+		cout << "Perdiste :(" << endl;
+	} break;
+	
+	case 'T': if(computer == 'p'){
+		cout << "Perdiste :(" << endl;
+	}else if(computer == 'T'){
+		cout << "Empataron!" << endl;
+	}else{
+		cout << "Ganaste!" << endl;
+	} break;
+	
+	case 'P': if(computer == 'p'){
+		cout << "Ganaste!" << endl;
+	}else if(computer == 'T'){
+		cout << "Perdiste :(" << endl;
+	}else{
+		cout << "Empataron!" << endl;
+	} break;
+	}
+}
